@@ -3,14 +3,14 @@ pipeline {
   stages {
     stage('Deploy to s3') {
       when {
-        branch 'master'
+        branch 'main'
       }
       steps {
         slackSend channel: "#<channel>", message: "Deployment Starting: ${env.JOB_NAME}, build number ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
         echo 'Deploying to RDG AWS s3 bucket.'
-        withAWS(region:'<AWS Region: like us-east-1>', credentials:'RDG AWS') {
-          s3Delete(bucket: '<Bucket Name>', path:'**/*')
-          s3Upload(bucket: '<Bucket Name>', includePathPattern:'**/*')
+        withAWS(region:'<AWS Region: like us-west-2>', credentials:'RDG AWS') {
+          s3Delete(bucket: 'mystaticwebsite2513', path:'**/*')
+          s3Upload(bucket: 'mystaticwebsite2513', includePathPattern:'**/*')
         }
       }
     }
