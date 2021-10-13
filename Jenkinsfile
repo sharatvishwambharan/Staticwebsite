@@ -9,4 +9,4 @@ stages{
               sh 'aws s3api put-object-acl --bucket mystaticwebsite2513 --id c8a6ffed-9e3c-4cc1-b0b4-3a342ee92464 --key AKIA4M5QZU5EJFICSMR2 --acl public-read'
           }
       }
-  }
+}
