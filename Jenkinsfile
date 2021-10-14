@@ -8,6 +8,7 @@ pipeline {
 
    stages {
         stage('Upload to S3') {
+            steps {
                     archiveArtifacts 'Desktop/*.html'
                     sh 'aws configure set region us-west-2'
                     sh 'aws s3 cp Desktop/index.html s3://mystaticweb2513.com/index.html'
@@ -16,5 +17,6 @@ pipeline {
                 }
             }
         }
+}
     
 
