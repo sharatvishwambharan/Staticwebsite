@@ -1,24 +1,34 @@
 pipeline {
-  agent any
-  stages {
-    stage('build') {
-      steps {
-        sh 'echo "Hello World"'
-        sh '''
-                  echo "Multiline shell steps works too"
-                  ls -lah
-                '''
-      }
+    agent any 
+
+     environment {
+        AWS_ACCESS_KEY_ID     = credentials('jenkins-aws-secret-key-id')
+        AWS_SECRET_ACCESS_KEY = credentials('jenkins-aws-secret-access-key')
+    }      
+
+    stages {
+        stage('Build') {
+            // build stage
+        }
+        stage('Test') {
+           // test stage
+        }
+        stage('Publish') {
+            steps {
+                sh './mvnw package'
+                // bat '.\mvnw package'
+            }
+            post {
+                success {
+                    archiveArtifacts 'Desktop/*.html'
+                    sh 'aws configure set region us-east-1'
+                    sh 'aws s3 cp C:\Users\sharat.v\Desktop\index.html s3://mystaticweb2513.com/index.html'
+                    bat 'aws configure set region us-east-1'
+                    bat 'aws s3 cp C:\Users\sharat.v\Desktop\index.html s3://mystaticweb2513.com/index.html'
+                }
+            }
+        }
     }
-	stage('Upload to AWS') {
-		 steps {
-			 withAWS(region:'ap-south-1',credentials:'aws-static') {
-			 sh 'echo "Uploading content with AWS creds"'
-				 s3Upload(pathStyleAccessEnabled: true, payloadSigningEnabled: true, file:'index.html', bucket:'jenkins-static-website-pipeline')
-			}
-		}
-    }
-  }
 }
 
   
