@@ -9,7 +9,6 @@ pipeline {
    stages {
         stage('Upload to S3') {
             steps {
-                    archiveArtifacts 'Staticwebsite/index.html/'
                     sh 'aws configure set region us-west-2'
                     sh 'aws s3 cp Staticwebsite/index.html s3://mystaticweb2513.com/index.html'
                     bat 'aws configure set region us-west-2'
