@@ -10,9 +10,9 @@ pipeline {
       stage('deploy to S3'){
           steps{
               sh 'aws s3 cp Desktop/index.html s3://mystaticweb2513.com'
-              sh 'aws s3api put-object-acl --bucket mystaticweb2513.com --key ${environment.AWS_ACCESS_KEY_ID, environment.AWS_SECRET_ACCESS_KEY} --acl public-read'
+              sh 'aws s3api put-object-acl --bucket mystaticweb2513.com --key ${AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY} --acl public-read'
               bat 'aws s3 cp Desktop/index.html s3://mystaticweb2513.com'
-              bat 'aws s3api put-object-acl --bucket mystaticweb2513.com --key ${environment.AWS_ACCESS_KEY_ID, environment.AWS_SECRET_ACCESS_KEY} --acl public-read'
+              bat 'aws s3api put-object-acl --bucket mystaticweb2513.com --key ${AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY} --acl public-read'
           }
       }
    }
