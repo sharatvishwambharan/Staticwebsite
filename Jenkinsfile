@@ -21,9 +21,9 @@ pipeline {
             post {
                 success {
                     archiveArtifacts 'Desktop/*.html'
-                    sh 'aws configure set region us-east-1'
+                    sh 'aws configure set region us-west-2'
                     sh 'aws s3 cp C:\Users\sharat.v\Desktop\index.html s3://mystaticweb2513.com/index.html'
-                    bat 'aws configure set region us-east-1'
+                    bat 'aws configure set region us-west-2'
                     bat 'aws s3 cp C:\Users\sharat.v\Desktop\index.html s3://mystaticweb2513.com/index.html'
                 }
             }
