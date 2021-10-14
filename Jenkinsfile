@@ -7,11 +7,15 @@ pipeline {
     }      
 
     stages {
-        stage('Build') {
-            // build stage
+     stage('Build') {
+            steps {
+                echo 'Building..'
+            }
         }
         stage('Test') {
-           // test stage
+            steps {
+                echo 'Testing..'
+            }
         }
         stage('Publish') {
             steps {
