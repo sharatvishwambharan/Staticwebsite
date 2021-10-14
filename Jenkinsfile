@@ -6,33 +6,14 @@ pipeline {
         AWS_SECRET_ACCESS_KEY = credentials('jenkins-aws-secret-access-key')
     }      
 
-    stages {
-     stage('Build') {
-            steps {
-                echo 'Building..'
-            }
-        }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-            }
-        }
-        stage('Publish') {
-            steps {
-                sh './mvnw package'
-                // bat '.\mvnw package'
-            }
-            post {
-                success {
-                    archiveArtifacts 'Desktop/*.html'
-                    sh 'aws configure set region us-west-2'
-                    sh 'aws s3 cp Desktop/index.html s3://mystaticweb2513.com/index.html'
-                    bat 'aws configure set region us-west-2'
-                    bat 'aws s3 cp Desktop/index.html s3://mystaticweb2513.com/index.html'
-                }
-            }
-        }
-    }
+   stages{
+      stage('deploy to S3'){
+          steps{
+              sh 'aws s3 cp Desktop/index.html s3://mystaticweb2513.com'
+              sh 'aws s3api put-object-acl --bucket mystaticweb2513.com --key ${environment.AWS_ACCESS-KEY-ID, environment.AWS_SECRET_ACCESS_KEY} --acl public-read'
+              bat 'aws s3 cp Desktop/index.html s3://mystaticweb2513.com'
+              bat 'aws s3api put-object-acl --bucket mystaticweb2513.com --key ${environment.AWS_ACCESS-KEY-ID, environment.AWS_SECRET_ACCESS_KEY} --acl public-read'
+          }
+      }
+   }
 }
-
-  
