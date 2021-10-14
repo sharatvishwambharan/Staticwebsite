@@ -13,7 +13,7 @@ pipeline {
                  //   sh 'aws s3 cp Staticwebsite/index.html s3://mystaticweb2513.com/index.html'
                   //  bat 'aws configure set region us-west-2'
                    // bat 'aws s3 cp Staticwebsite/index.html s3://mystaticweb2513.com/index.html'
-                ls
+                bat 'dir'
                 }
             }
         }
