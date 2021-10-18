@@ -12,12 +12,6 @@ pipeline {
                bat 'aws configure set region us-west-2'
                bat 'aws s3 cp index.html s3://mystaticweb2513.com/index.html'
            }
-        }
-            stage('Upload to AWS S3') {
-             steps {
-               bat 'aws configure set region us-west-2'
-               bat 'aws s3 cp error.html s3://mystaticweb2513.com/error.html'
-           }
             }
         }
 }
