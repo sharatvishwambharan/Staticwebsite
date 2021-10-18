@@ -11,8 +11,7 @@ pipeline {
             steps {
                bat 'aws configure set region us-west-2'
                bat 'aws s3 cp index.html s3://mystaticweb2513.com/index.html'
-             //   bat 'dir'
-                }
+           }
             }
         }
 }
